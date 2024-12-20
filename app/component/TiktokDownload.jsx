@@ -23,6 +23,7 @@ export default function TikTokDownloader() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [played, setPlayed] = useState("searching...")
+  const [shared, setShared] = useState("searching...")
   const [commented, setCommented]= useState("searching...")
   const [selectedMedia, setSelectedMedia] = useState("");  // Store selected media type (original, hd, watermarked)
   const [downloadUrl, setDownloadUrl] = useState("");  // Store the download URL based on selected media
@@ -75,7 +76,8 @@ export default function TikTokDownloader() {
   
       setAudioUrl(audioData.BK9.audio); // Set the audio URL from the response
     
-//   const saved = audioData.BK9.saved || "No saved available.";
+
+  setShared(audioData.BK9.shared || "Unknown");
 //   const song = audioData.BK9.song || "Unknown song";
 setPlayed(audioData.BK9.played || "Unknown");
 setCommented(audioData.BK9.commented || "Unknown");
@@ -100,15 +102,18 @@ setCommented(audioData.BK9.commented || "Unknown");
 //       setError("Failed to download the file. Please try again.");
 //     }
 //   };
-  const formatNumber = (numString) => {
-    const num = parseInt(numString.replace(".", ""), 10); // Convert string to number
-    if (num >= 1_000_000) {
-      return `${(num / 1_000_000).toFixed(1)}M`; // Millions
-    } else if (num >= 1_000) {
-      return `${(num / 1_000).toFixed(1)}K`; // Thousands
+function formatNumber(numString) {
+    const num = parseInt(numString.replace(".", ""));
+  
+    if (num >= 1000000) {
+      return `${(num / 1000000).toFixed(1)}M`;
+    } else if (num >= 1000) {
+      return `${(num / 1000).toFixed(1)}M`;
+    } else {
+      return num.toString();
     }
-    return num.toString(); // Less than 1,000
-  };
+  }
+  
   const downloadFile = async (url, filename) => {
     setIsDownloading(true); // Start download process
     try {
@@ -167,7 +172,7 @@ setCommented(audioData.BK9.commented || "Unknown");
         />
         <Button
           onClick={handleDownload}
-          className="w-full"
+          className="w-full bg-black text-white"
           disabled={loading}
           variant="primary"
         >
@@ -223,14 +228,14 @@ setCommented(audioData.BK9.commented || "Unknown");
             <p>❤️ {formatNumber(videoData.like || "0")}</p>
             <p>👀 {played || 0}</p>
     <p>💬 {commented || 0}</p>
-    <p className="flex items-center justify-center gap-1"><FaShare /> {formatNumber(videoData.share || "0")}</p>
+    <p className="flex items-center justify-center gap-1"><FaShare /> {shared || 0}</p>
             </div>
           </div>
 
           {audioUrl && (
         <div className="audio-container">
           <h2>song :{videoData.music.author} - {videoData.music.title}</h2>
-          <audio controls className="bg-[#F1F3F4] rounded-lg mt-1" >
+          <audio controls className="bg-[#F1F3F4] rounded-lg mt-1 max-w-full" >
             <source src={audioUrl} type="audio/mp3" />
             Your browser does not support the audio element.
           </audio>
