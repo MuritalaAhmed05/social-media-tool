@@ -3,9 +3,8 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { FiDownload, FiLoader, FiVideo } from "react-icons/fi";
+import { FiDownload, FiLoader } from "react-icons/fi";
 
 export default function TikTokDownloader() {
   const [videoUrl, setVideoUrl] = useState("");
@@ -59,113 +58,119 @@ export default function TikTokDownloader() {
   };
 
   return (
-    <section className="py-10">
-      <div className="container px-1 w-full">
-        <Card className="shadow-lg">
-          <CardContent>
-            <div className="flex flex-col items-center space-y-4">
-              <Input
-                type="text"
-                placeholder="Paste TikTok video URL here"
-                value={videoUrl}
-                onChange={(e) => setVideoUrl(e.target.value)}
-                className="w-full mt-4"
-              />
-              <Button
-                onClick={handleDownload}
-                className="w-full"
-                disabled={loading}
-                variant="primary"
-              >
-                {loading ? (
-                  <>
-                    <FiLoader className="animate-spin mr-2" />
-                    Loading...
-                  </>
-                ) : (
-                  <>
-                    <FiDownload className="mr-2" />
-                    Download
-                  </>
-                )}
-              </Button>
-              {error && (
-                <Alert variant="destructive" className="w-full">
-                  <AlertTitle>Error: </AlertTitle>
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
-            </div>
+    <section className="w-full ">
+      <div className="w-full flex flex-col items-center">
+        <Input
+          type="text"
+          placeholder="Paste TikTok video URL here"
+          value={videoUrl}
+          onChange={(e) => setVideoUrl(e.target.value)}
+          className="w-full mb-4"
+        />
+        <Button
+          onClick={handleDownload}
+          className="w-full"
+          disabled={loading}
+          variant="primary"
+        >
+          {loading ? (
+            <>
+              <FiLoader className="animate-spin mr-2" />
+              Loading...
+            </>
+          ) : (
+            <>
+              <FiDownload className="mr-2" />
+              Download
+            </>
+          )}
+        </Button>
+        {error && (
+          <Alert variant="destructive" className="w-full mt-4">
+            <AlertTitle>Error:</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+      </div>
 
-            {videoData && (
-              <div className="mt-6">
-                {/* Video Player Section */}
-              
-                <div className="relative w-full  overflow-hidden flex justify-center items-center rounded-lg">
-                  <video
-                    controls
-                    className="w-[350px] self-center items-center h-full rounded-lg"
-                    src={videoData.meta.media[0]?.org || ""}
-                  />
-                  {!videoData.meta.media[0]?.org && (
-                    <div className="flex items-center justify-center ">
-                      <FiVideo className="text-white text-6xl" />
-                    </div>
+      {videoData && (
+        <div className="mt-6 w-full space-y-6">
+          {/* Video Player */}
+          <div className="relative overflow-hidden flex justify-center items-center rounded-lg">
+            <video
+              controls
+              className="w-full max-w-3xl h-auto rounded-lg"
+              src={videoData.meta.media[0]?.org || ""}
+            />
+          </div>
+
+          {/* Video Details */}
+          <div className="space-y-2">
+            <h2 className="text-lg font-bold">{videoData.title}</h2>
+            <p className="text-sm text-gray-600">
+              By: {videoData.author.nickname} ({videoData.author.username})
+            </p>
+            <p className="text-sm text-gray-600">
+              Published: {videoData.published}
+            </p>
+            <p className="text-sm text-gray-600">
+              Duration: {videoData.duration} seconds
+            </p>
+            <div className="flex space-x-6 text-gray-600">
+              <p>❤️ {videoData.like}</p>
+              <p>💬 {videoData.comment}</p>
+              <p>🔗 {videoData.share}</p>
+            </div>
+          </div>
+
+          {/* Download Options */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Download Options</h3>
+            {videoData.meta.media.map((media, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between p-4 bg-gray-100 rounded-lg"
+              >
+                <p className="text-sm font-medium capitalize">
+                  {media.type} ({media.size_org || media.size_hd || media.size_wm})
+                </p>
+                <div className="flex space-x-2">
+                  {media.org && (
+                    <Button
+                      onClick={() =>
+                        downloadFile(media.org, `${videoData.title}_Original.mp4`)
+                      }
+                      className="bg-green-500 text-white"
+                    >
+                      Original
+                    </Button>
+                  )}
+                  {media.hd && (
+                    <Button
+                      onClick={() =>
+                        downloadFile(media.hd, `${videoData.title}_HD.mp4`)
+                      }
+                      className="bg-blue-500 text-white"
+                    >
+                      HD
+                    </Button>
+                  )}
+                  {media.wm && (
+                    <Button
+                      onClick={() =>
+                        downloadFile(media.wm, `${videoData.title}_Watermarked.mp4`)
+                      }
+                      className="bg-red-500 text-white"
+                    >
+                      Watermarked
+                    </Button>
                   )}
                 </div>
-
-                {/* Video Details */}
-                <div className="mt-4 space-y-2">
-                  <p className="text-lg font-bold">{videoData.title}</p>
-                  <p className="text-sm text-gray-600">
-                    By: {videoData.author.nickname} (@{videoData.author.username})
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Published: {videoData.published}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Duration: {videoData.duration} seconds
-                  </p>
-                  <div className="flex space-x-6 text-gray-600 mt-2">
-                    <p>❤️ {videoData.likes || "N/A"}</p>
-                    <p>💬 {videoData.comments || "N/A"}</p>
-                    <p>🔗 {videoData.shares || "N/A"}</p>
-                  </div>
-                </div>
-
-                {/* Download Options */}
-                <div className="mt-6">
-                  <h3 className="text-xl font-semibold mb-4">Download Options</h3>
-                  <div className="space-y-4">
-                    {videoData.meta.media.map((media, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between p-4 bg-gray-100 rounded-lg"
-                      >
-                        <p className="text-sm font-medium capitalize">
-                          {media.type} ({media.size_org || media.size_hd || media.size_wm})
-                        </p>
-                        <Button
-                          onClick={() =>
-                            downloadFile(
-                              media.org || media.hd || media.wm,
-                              `${videoData.title || "tiktok-video"}_${media.type}.mp4`
-                            )
-                          }
-                          className="bg-green-500 text-white"
-                        >
-                          <FiDownload className="mr-2" />
-                          Download
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

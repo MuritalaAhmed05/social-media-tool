@@ -52,7 +52,7 @@ export function TabsDemo() {
           </CardHeader>
           <CardContent className="">
            
-<TikTokDownloader/>
+<TikTokDownloader className="w-full"/>
           </CardContent>
           <CardFooter>
             <Button>Save changes</Button>
