@@ -108,7 +108,7 @@ function formatNumber(numString) {
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)}M`;
     } else if (num >= 1000) {
-      return `${(num / 1000).toFixed(1)}M`;
+      return `${(num / 1000).toFixed(1)}K`;
     } else {
       return num.toString();
     }
@@ -234,7 +234,7 @@ function formatNumber(numString) {
 
           {audioUrl && (
         <div className="audio-container">
-          <h2>song :{videoData.music.author} - {videoData.music.title}</h2>
+          <h2>song : {videoData.music.author} - {videoData.music.title}</h2>
           <audio controls className="bg-[#F1F3F4] rounded-lg mt-1 max-w-full" >
             <source src={audioUrl} type="audio/mp3" />
             Your browser does not support the audio element.
@@ -244,10 +244,11 @@ function formatNumber(numString) {
           {/* Download Options */}
           <div className="space-y-4">
       {videoData.meta.media.map((media, index) => (
-        <div
+          <div
           key={index}
           className="p-4 bg-gray-100 rounded-lg"
-        >
+          >
+          <h2 className="font-bold text-md">Download Video</h2>
            <p className="text-sm font-medium mb-2">Size: {downloadSize}</p>
 
           <div className="flex space-x-2 items-center justify-center flex-wrap space-y-2">
@@ -293,7 +294,10 @@ function formatNumber(numString) {
     </div>
           {audioUrl && (
               <div className="flex justify-between p-4 bg-gray-100 rounded-lg">
-                <p className="text-sm font-medium">Audio</p>
+                 <div className="flex flex-col">
+                     <h2 className="font-bold text-md">Download Audio</h2>
+                                     <p className="text-sm font-medium">Audios are downloaded in Mp3</p>
+                 </div>
                 <Button onClick={() => downloadFile(audioUrl, "audio.mp3")}>
                   Download
                 </Button>
