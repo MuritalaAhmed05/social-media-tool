@@ -15,9 +15,11 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import TikTokDownloader from "./TiktokDownload"
-import TikTokProfile from "./TikTokStalk"
-import TikTokSearch from "./TikTokSearch"
+import TikTokDownloader from "../TikTok/TiktokDownload"
+import TikTokProfile from "../TikTok/TikTokStalk"
+import TikTokSearch from "../TikTok/TikTokSearch"
+import InstagramDownload from "../Instagram/InstagramDownload"
+import InstagramStalk from "../Instagram/InstagramStalk"
 
 export function TabsDemo() {
   return (
@@ -131,18 +133,11 @@ export function TabsDemo() {
           <CardHeader>
             <CardTitle>Instagram Downloader</CardTitle>
             <CardDescription>
-              Make changes to your Instagram Downloader here. Click save when you're done.
+            Download any Instagram video here.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
+         <InstagramDownload/>
           </CardContent>
           <CardFooter>
             <Button>Save changes</Button>
@@ -157,18 +152,11 @@ export function TabsDemo() {
           <CardHeader>
             <CardTitle>Instagram Stalk</CardTitle>
             <CardDescription>
-              Change your TikTok Search here. After saving, you'll be logged out.
+            Check any Instagramer's Profile by there UserName
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+            <InstagramStalk/>
           </CardContent>
           <CardFooter>
             <Button>Save password</Button>

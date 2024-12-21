@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { FaPlay, FaThumbsUp, FaShareAlt, FaComment, FaSearch  } from "react-icons/fa"; // Added FaComment for comments
-import { FiLoader, FiDownload } from "react-icons/fi";
+import { FaPlay, FaHeart , FaShareAlt, FaComment, FaSearch  } from "react-icons/fa"; // Added FaComment for comments
+import { FiLoader } from "react-icons/fi";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"; // Import Avatar component from shadcn
 
@@ -110,7 +110,7 @@ const Search = () => {
                   <span>{formatNumber(video.play || 0)}</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <FaThumbsUp />
+                  <FaHeart  />
                   <span>{formatNumber(video.like || 0)}</span>
                 </div>
                 <div className="flex items-center space-x-2">
