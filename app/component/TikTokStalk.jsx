@@ -114,11 +114,11 @@ const TikTokProfile = () => {
           {/* Stats Section */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="text-center p-4 rounded-lg shadow-lg flex flex-col items-center justify-center">
-              <FiHeart size={28} className="text-red-500 mb-2 text-center" />
+              <FiUser size={28} className="text-green-500 mb-2 text-center" />
               <p className="text-2xl font-semibold text-gray-800">
-                {formatNumber(profileData.stats.heartCount)}
+                {formatNumber(profileData.stats.followingCount)}
               </p>
-              <p className="text-sm text-gray-500">Hearts</p>
+              <p className="text-sm text-gray-500">Following</p>
             </div>
             <div className="text-center p-4 rounded-lg shadow-lg flex flex-col items-center justify-center">
               <FiUsers size={28} className="text-blue-500 mb-2 text-center" />
@@ -128,11 +128,11 @@ const TikTokProfile = () => {
               <p className="text-sm text-gray-500">Followers</p>
             </div>
             <div className="text-center p-4 rounded-lg shadow-lg flex flex-col items-center justify-center">
-              <FiUser size={28} className="text-green-500 mb-2 text-center" />
+              <FiHeart size={28} className="text-red-500 mb-2 text-center" />
               <p className="text-2xl font-semibold text-gray-800">
-                {formatNumber(profileData.stats.followingCount)}
+                {formatNumber(profileData.stats.heartCount)}
               </p>
-              <p className="text-sm text-gray-500">Following</p>
+              <p className="text-sm text-gray-500">Hearts</p>
             </div>
             <div className="text-center p-4 rounded-lg shadow-lg flex flex-col items-center justify-center">
               <FiVideo size={28} className="text-purple-500 mb-2 text-center" />

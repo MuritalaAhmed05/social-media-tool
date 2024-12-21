@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/tabs"
 import TikTokDownloader from "./TiktokDownload"
 import TikTokProfile from "./TikTokStalk"
+import TikTokSearch from "./TikTokSearch"
 
 export function TabsDemo() {
   return (
@@ -90,18 +91,13 @@ export function TabsDemo() {
           <CardHeader>
             <CardTitle>TikTok Search</CardTitle>
             <CardDescription>
-              Change your TikTok Search here. After saving, you'll be logged out.
+            Enter your search...
             </CardDescription>
           </CardHeader>
+
+          
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+           <TikTokSearch />
           </CardContent>
           <CardFooter>
             <Button>Save password</Button>
