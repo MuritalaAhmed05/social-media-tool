@@ -99,6 +99,25 @@ function formatNumber(numString) {
       setIsDownloading(false);
     }
   };
+  const downloadImageFile = async (url, filename) => {
+    setIsDownloading(true);
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Failed to fetch the file");
+      }
+      const blob = await response.blob();
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error("Download failed:", error);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
   const handleSelectChange = (value, media) => {
     setSelectedMedia(value);
     switch (value) {
@@ -157,14 +176,39 @@ function formatNumber(numString) {
       {videoData && (
         <div className="mt-6 w-full space-y-6 ">
         {}
-        <div className="relative overflow-hidden flex justify-center items-center rounded-lg ">
-          <video
-            controls
-            className="w-full h-auto rounded-lg max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-3xl sm:aspect-video sm:object-contain sm:rounded-lg"
-            src={videoData.meta.media[0]?.org || ""}
-          />
-        </div>
-          {}
+        <div className="relative overflow-hidden flex justify-center items-center rounded-lg">
+  {videoData.meta.media[0]?.type === "video" ? (
+    <video
+      controls
+      className="w-full h-auto rounded-lg max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-3xl sm:aspect-video sm:object-contain sm:rounded-lg"
+      src={videoData.meta.media[0]?.org || ""}
+    />
+  ) : (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
+  {videoData.meta.media[0]?.images?.map((image, index) => (
+  <div key={index} className="mb-4">
+    <img
+      className="w-full h-auto rounded-lg object-cover"
+      src={image}
+      alt={`Image ${index + 1}`}
+    />
+    <button
+     onClick={() => downloadImageFile(image, `Image_${index + 1}.jpg`)}
+      className="block mt-2 px-4 py-2 text-white bg-black rounded-lg text-center hover:bg-black"
+    >
+      Download Image {index + 1}
+    </button>
+  </div>
+))}
+
+
+    </div>
+  )}
+</div>
+
+          
+
+          
           <div className="space-y-2">
             <h3 className="text-sm font-bold"><span className="text-gray-700">Caption</span>:<br/>
             {videoData.title}
@@ -186,63 +230,85 @@ function formatNumber(numString) {
     <p className="flex items-center justify-center gap-1"><FaShare /> {shared || 0}</p>
             </div>
           </div>
-          {audioUrl && (
-        <div className="audio-container">
-          <h2>song : {videoData.music.author} - {videoData.music.title}</h2>
-          <audio controls className="bg-[#F1F3F4] rounded-lg mt-1 max-w-full" >
-            <source src={audioUrl} type="audio/mp3" />
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-      )}
+          {(audioUrl || videoData.meta.media[0]?.audio) && (
+  <div className="audio-container">
+    <h2>song : {videoData.music.author} - {videoData.music.title}</h2>
+    <audio controls className="bg-[#F1F3F4] rounded-lg mt-1 max-w-full">
+      <source
+        src={audioUrl || videoData.meta.media[0]?.audio}
+        type="audio/mp3"
+      />
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+)}
+
           {}
           <div className="space-y-4">
-      {videoData.meta.media.map((media, index) => (
-          <div
-          key={index}
-          className="p-4 bg-gray-100 rounded-lg"
-          >
-          <h2 className="font-bold text-md">Download Video</h2>
-           <p className="text-sm font-medium mb-2">Size: {downloadSize}</p>
-          <div className="flex space-x-2 items-center justify-center flex-wrap space-y-2">
-            {}
-            <Select onValueChange={(value) => handleSelectChange(value, media)}>
-              <SelectTrigger className="bg-gray-200 text-black p-2 rounded-lg outline-none">
-                <SelectValue placeholder="Choose Media" className="outline-none" />
-              </SelectTrigger>
-              <SelectContent className="bg-white border rounded-lg outline-none">
-                {media.org && (
-                  <SelectItem value="original">Original</SelectItem>
-                )}
-                {media.hd && (
-                  <SelectItem value="hd">HD</SelectItem>
-                )}
-                {media.wm && (
-                  <SelectItem value="watermarked">Watermarked</SelectItem>
-                )}
-              </SelectContent>
-            </Select>
-            {selectedMedia && downloadUrl && (
+          {videoData.meta.media.map((media, index) => (
+  <div key={index} className="p-4 bg-gray-100 rounded-lg">
+    <h2 className="font-bold text-md">Download {media.type === "image" ? "Images" : "Video"}</h2>
+    <p className="text-sm font-medium mb-2">Size: {downloadSize}</p>
+    <div className="flex space-x-2 items-center justify-center flex-wrap space-y-2">
+      {/* Select component for media type */}
+      <Select onValueChange={(value) => handleSelectChange(value, media)}>
+        <SelectTrigger className="bg-gray-200 text-black p-2 rounded-lg outline-none">
+          <SelectValue placeholder="Choose Media" className="outline-none" />
+        </SelectTrigger>
+        <SelectContent className="bg-white border rounded-lg outline-none">
+          {media.org && (
+            <SelectItem value="original">Original</SelectItem>
+          )}
+          {media.hd && (
+            <SelectItem value="hd">HD</SelectItem>
+          )}
+          {media.wm && (
+            <SelectItem value="watermarked">Watermarked</SelectItem>
+          )}
+        </SelectContent>
+      </Select>
+
+      {/* Download button for images or video */}
+      {media.type === "image" ? (
         <button
           onClick={() =>
-            downloadFile(downloadUrl, `${videoData.title}_${selectedMedia}.mp4`)
+            media.images.forEach((image, idx) =>
+              downloadFile(image, `Image_${idx + 1}.jpg`)
+            )
           }
-          className="bg-blue-500 text-white px-4 py-2 self-start rounded-lg text-nowrap flex items-center justify-center w-full"
+          className="bg-black text-white px-4 py-2 self-start rounded-lg text-nowrap flex items-center justify-center w-full"
           disabled={isDownloading}
         >
           {isDownloading ? (
             <FaSpinner className="animate-spin" />
           ) : (
-            <>
-              Download{" "}
-              {selectedMedia.charAt(0).toUpperCase() + selectedMedia.slice(1)}
-            </>
+            <>Download All Images</>
           )}
         </button>
+      ) : (
+        selectedMedia && downloadUrl && (
+          <button
+            onClick={() =>
+              downloadFile(downloadUrl, `${videoData.title}_${selectedMedia}.mp4`)
+            }
+            className="bg-black text-white px-4 py-2 self-start rounded-lg text-nowrap flex items-center justify-center w-full"
+            disabled={isDownloading}
+          >
+            {isDownloading ? (
+              <FaSpinner className="animate-spin" />
+            ) : (
+              <>
+                Download{" "}
+                {selectedMedia.charAt(0).toUpperCase() + selectedMedia.slice(1)}
+              </>
+            )}
+          </button>
+        )
       )}
-          </div>
-        </div>
-      ))}
+    </div>
+  </div>
+))}
+
     </div>
           {audioUrl && (
               <div className="flex justify-between p-4 bg-gray-100 rounded-lg items-center">
