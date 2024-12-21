@@ -22,23 +22,27 @@ const Search = () => {
   };
 
   const handleDownload = async () => {
-    if (!videoUrl) return;
-
+    if (!videoUrl) {
+      setError("Please enter a search term");
+      return; // Exit the function early if the input is empty
+    }
+  
     setLoading(true);
     setError(""); // Reset error message before starting new fetch
+  
     try {
       const response = await fetch(
         `https://deliriussapi-oficial.vercel.app/search/tiktoksearch?query=${videoUrl}`
       );
       const data = await response.json();
       setVideos(data.meta || []); // Ensure fallback if `meta` is undefined
-    } catch (error) {
-      console.error("Error fetching videos:", error);
-      setError("Failed to fetch videos. Please try again."); // Set error message
+    } catch (err) {
+      setError("Failed to fetch videos. Please try again."); // Set error message on failure
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen text-black flex flex-col items-center font-sans">

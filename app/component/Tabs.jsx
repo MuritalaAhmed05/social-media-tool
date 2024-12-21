@@ -20,6 +20,7 @@ import TikTokProfile from "../TikTok/TikTokStalk"
 import TikTokSearch from "../TikTok/TikTokSearch"
 import InstagramDownload from "../Instagram/InstagramDownload"
 import InstagramStalk from "../Instagram/InstagramStalk"
+import XDownload from "../X/XDownload"
 
 export function TabsDemo() {
   return (
@@ -124,9 +125,9 @@ export function TabsDemo() {
             <CardTitle>Instagram</CardTitle>
             <CardDescription>
             <Tabs defaultValue="Instagram Downloader" className="w-full">
-      <TabsList className="grid w-full grid-cols-2">
+      <TabsList className="grid w-full">
         <TabsTrigger value="Instagram Downloader">Instagram Downloader</TabsTrigger>
-        <TabsTrigger value="Instagram Stalk">Instagram Stalk</TabsTrigger>
+        {/* <TabsTrigger value="Instagram Stalk">Instagram Stalk</TabsTrigger> */}
       </TabsList>
       <TabsContent value="Instagram Downloader">
         <Card>
@@ -145,24 +146,6 @@ export function TabsDemo() {
         </Card>
       </TabsContent>
 
-
-
-      <TabsContent value="Instagram Stalk">
-        <Card>
-          <CardHeader>
-            <CardTitle>Instagram Stalk</CardTitle>
-            <CardDescription>
-            Check any Instagramer's Profile by there UserName
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <InstagramStalk/>
-          </CardContent>
-          <CardFooter>
-            <Button>Save password</Button>
-          </CardFooter>
-        </Card>
-      </TabsContent>
     </Tabs>
             </CardDescription>
           </CardHeader>
@@ -176,24 +159,34 @@ export function TabsDemo() {
       <TabsContent value="X">
         <Card>
           <CardHeader>
-            <CardTitle>X</CardTitle>
+            <CardTitle>X Downloader</CardTitle>
             <CardDescription>
-              Change your password here. After saving, you'll be logged out.
+            <Tabs defaultValue="X Downloader" className="w-full">
+      <TabsList className="grid w-full">
+        <TabsTrigger value="X Downloader" className="w-full">X Downloader</TabsTrigger>
+        {/* <TabsTrigger value="Instagram Stalk">Instagram Stalk</TabsTrigger> */}
+      </TabsList>
+      <TabsContent value="X Downloader">
+        <Card>
+          <CardHeader>
+            <CardTitle className="w-full">X Downloader</CardTitle>
+            <CardDescription>
+            Download any X video here.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+          <XDownload/>
           </CardContent>
           <CardFooter>
-            <Button>Save password</Button>
+            <Button>Save changes</Button>
           </CardFooter>
+        </Card>
+      </TabsContent>
+
+    </Tabs>
+            </CardDescription>
+          </CardHeader>
+         
         </Card>
       </TabsContent>
 

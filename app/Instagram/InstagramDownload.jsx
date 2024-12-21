@@ -54,7 +54,7 @@ export default function InstagramDownload() {
         />
         <button
           onClick={handleDownload}
-          className="p-2 bg-black w-full text-white rounded-md flex items-center justify-center space-x-2"
+          className="p-3 bg-black w-full text-white rounded-md flex items-center justify-center space-x-2"
         >
           {loading ? (
             <>
