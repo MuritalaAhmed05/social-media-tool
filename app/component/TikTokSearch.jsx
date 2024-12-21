@@ -1,13 +1,25 @@
 "use client";
 import React, { useState } from "react";
-import { FaPlay, FaThumbsUp, FaShareAlt } from "react-icons/fa";
+import { FaPlay, FaThumbsUp, FaShareAlt, FaComment } from "react-icons/fa"; // Added FaComment for comments
 import { FiLoader, FiDownload } from "react-icons/fi";
-import { Alert, AlertDescription, AlertTitle } from  "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"; // Import Avatar component from shadcn
+
 const Search = () => {
   const [videoUrl, setVideoUrl] = useState("");
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(""); // State to manage error messages
+
+  // Helper function to format large numbers
+  const formatNumber = (num) => {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + "M";
+    } else if (num >= 1000) {
+      return (num / 1000).toFixed(1) + "K";
+    }
+    return num;
+  };
 
   const handleDownload = async () => {
     if (!videoUrl) return;
@@ -69,7 +81,7 @@ const Search = () => {
         </div>
       )}
 
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8 px-4 place-items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8 px-4 place-items-center">
         {videos.map((video) => (
           <div
             key={video.id}
@@ -91,21 +103,39 @@ const Search = () => {
               <h2 className="text-lg font-semibold text-white truncate mt-2">
                 {video.title || "No Title"}
               </h2>
+
               <div className="flex justify-between items-center mt-2 text-sm text-gray-400">
                 <div className="flex items-center space-x-2">
                   <FaPlay />
-                  <span>{video.play || 0}</span>
+                  <span>{formatNumber(video.play || 0)}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <FaThumbsUp />
-                  <span>{video.like || 0}</span>
+                  <span>{formatNumber(video.like || 0)}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <FaShareAlt />
-                  <span>{video.share || 0}</span>
+                  <span>{formatNumber(video.share || 0)}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <FaComment />
+                  <span>{formatNumber(video.coment || 0)}</span> {/* Display formatted comment count */}
+                </div>
+              </div>
+              
+              {/* Display author details */}
+              <div className="mt-4 flex items-center space-x-3">
+                <Avatar>
+                  <AvatarImage src={video.author.avatar} alt={video.author.nickname} />
+                  <AvatarFallback>{video.author.nickname.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <div className="text-sm text-gray-300">
+                  <p className="font-semibold">{video.author.nickname}</p>
+                  <p className="text-xs">{video.author.username}</p>
                 </div>
               </div>
             </div>
+
             <a
               href={video.url}
               target="_blank"
