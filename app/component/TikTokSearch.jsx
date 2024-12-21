@@ -46,7 +46,7 @@ const Search = () => {
         <div className="w-full flex flex-col items-center">
           <input
             type="text"
-            placeholder="Paste TikTok video URL here"
+            placeholder="Search..."
             value={videoUrl}
             onChange={(e) => setVideoUrl(e.target.value)}
             className="w-full mb-4 p-3 text-black rounded-md border border-gray-600"
@@ -152,3 +152,14 @@ const Search = () => {
 };
 
 export default Search;
+
+//  <iframe
+//  src={`https://www.tiktok.com/embed/${video.id}?autoplay=0`}
+//  title={video.title}
+//  width="100%"
+//  height="400"
+//  frameBorder="0"
+//  allow="autoplay; encrypted-media"
+//  allowFullScreen
+//  className="w-full h-72 rounded-lg"
+// ></iframe>
