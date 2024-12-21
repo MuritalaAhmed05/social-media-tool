@@ -4,10 +4,10 @@ import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FiHeart, FiUser, FiVideo, FiUsers, FiDownload, FiLoader } from "react-icons/fi"; // Importing necessary icons
+import { FiHeart, FiUser, FiVideo, FiUsers, FiLoader } from "react-icons/fi"; // Importing necessary icons
 import { MdVerified } from "react-icons/md";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-
+import { FaSearch } from "react-icons/fa";
 const TikTokProfile = () => {
   const [username, setUsername] = useState(""); // State for TikTok username
   const [profileData, setProfileData] = useState(null);
@@ -71,23 +71,23 @@ const TikTokProfile = () => {
           className="w-full bg-black text-white mb-5"
           disabled={loading}
         >
-          {loading ? (
-            <>
-              <FiLoader className="animate-spin mr-2" />
-              Loading...
-            </>
-          ) : (
-            <>
-              <FiDownload className="mr-2" />
-              Search
-            </>
-          )}
+           {loading ? (
+                       <>
+                         <FiLoader className="animate-spin mr-2" />
+                         Searching...
+                       </>
+                     ) : (
+                       <>
+                         <FaSearch  className="mr-2" />
+                         Search 
+                       </>
+                     )}
         </Button>
       </div>
 
       {/* Error State */}
       {error && (
-        <Alert variant="destructive" className="w-full mt-4">
+        <Alert variant="destructive" className="w-full mt-1">
           <AlertTitle>Error:</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>

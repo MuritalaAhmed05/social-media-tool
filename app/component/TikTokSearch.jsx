@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { FaPlay, FaThumbsUp, FaShareAlt, FaComment } from "react-icons/fa"; // Added FaComment for comments
+import { FaPlay, FaThumbsUp, FaShareAlt, FaComment, FaSearch  } from "react-icons/fa"; // Added FaComment for comments
 import { FiLoader, FiDownload } from "react-icons/fi";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"; // Import Avatar component from shadcn
@@ -59,12 +59,12 @@ const Search = () => {
             {loading ? (
               <>
                 <FiLoader className="animate-spin mr-2" />
-                Loading...
+                Searching...
               </>
             ) : (
               <>
-                <FiDownload className="mr-2" />
-                Download
+                <FaSearch  className="mr-2" />
+                Search 
               </>
             )}
           </button>
@@ -73,19 +73,19 @@ const Search = () => {
 
       {/* Display the error alert if there's an error */}
       {error && (
-        <div className="w-full mt-4 px-4">
-          <Alert className="bg-red-500 text-white">
+      
+          <Alert variant="destructive" className="w-full mt-4">
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>{error}</AlertDescription>
           </Alert>
-        </div>
+       
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8 px-4 place-items-center">
         {videos.map((video) => (
           <div
             key={video.id}
-            className="bg-gray-900 p-4 rounded-xl shadow-xl w-72 overflow-hidden"
+            className="bg-black p-4 rounded-xl shadow-xl w-full overflow-hidden"
           >
             <div className="relative">
               {/* Video element to display the video using hd URL */}
