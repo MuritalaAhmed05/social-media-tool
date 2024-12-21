@@ -85,7 +85,7 @@ const Search = () => {
         {videos.map((video) => (
           <div
             key={video.id}
-            className="bg-black p-4 rounded-xl shadow-xl w-full overflow-hidden"
+            className="bg-black p-4 rounded-xl shadow-xl w-72 overflow-hidden"
           >
             <div className="relative">
               {/* Video element to display the video using hd URL */}
