@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -25,8 +24,8 @@ export default function TikTokDownloader() {
   const [played, setPlayed] = useState("searching...")
   const [shared, setShared] = useState("searching...")
   const [commented, setCommented]= useState("searching...")
-  const [selectedMedia, setSelectedMedia] = useState("");  // Store selected media type (original, hd, watermarked)
-  const [downloadUrl, setDownloadUrl] = useState("");  // Store the download URL based on selected media
+  const [selectedMedia, setSelectedMedia] = useState("");
+  const [downloadUrl, setDownloadUrl] = useState("");
   const [downloadSize, setDownloadSize] = useState("");
   const [isDownloading, setIsDownloading] = useState(false);
   const handleDownload = async () => {
@@ -34,77 +33,45 @@ export default function TikTokDownloader() {
       setError("Please enter a valid TikTok video URL.");
       return;
     }
-  
     setLoading(true);
-    setError(""); // Reset the error message
-    setVideoData(null); // Reset video data state
-    setAudioUrl(null); // Reset audio URL state
-  
+    setError("");
+    setVideoData(null);
+    setAudioUrl(null);
     try {
-      // First fetch video details
       const videoResponse = await fetch(
         `https://deliriussapi-oficial.vercel.app/download/tiktok?url=${videoUrl}`
       );
-  
       if (!videoResponse.ok) {
         throw new Error("Failed to fetch video details. Please try again.");
       }
-  
       const videoData = await videoResponse.json();
-  
       if (!videoData.status) {
         throw new Error("Invalid video URL or the video cannot be downloaded.");
       }
-  
-      setVideoData(videoData.data); // Set video data from the response
-  
-      // After fetching video details, fetch audio
+      setVideoData(videoData.data);
       const audioResponse = await fetch(
         `https://bk9.fun/download/tiktok2?url=${videoUrl}`
       );
-  
       if (!audioResponse.ok) {
         throw new Error("Failed to fetch audio details. Please try again.");
       }
-  
       const audioData = await audioResponse.json();
       console.log(audioData);
-
       if (!audioData.status) {
         throw new Error("Audio is not available for this video.");
       }
-  
-      setAudioUrl(audioData.BK9.audio); // Set the audio URL from the response
-    
-
+      setAudioUrl(audioData.BK9.audio);
   setShared(audioData.BK9.shared || "Unknown");
-//   const song = audioData.BK9.song || "Unknown song";
 setPlayed(audioData.BK9.played || "Unknown");
 setCommented(audioData.BK9.commented || "Unknown");
-//   console.log(videoUrl, played, commented, saved, song);
     } catch (err) {
       setError(err.message || "An unexpected error occurred.");
     } finally {
-      setLoading(false); // Stop loading once both fetches are complete
+      setLoading(false);
     }
   };
-  
-
-//   const downloadFile = async (url, filename) => {
-//     try {
-//       const response = await fetch(url);
-//       const blob = await response.blob();
-//       const link = document.createElement("a");
-//       link.href = window.URL.createObjectURL(blob);
-//       link.download = filename;
-//       link.click();
-//     } catch {
-//       setError("Failed to download the file. Please try again.");
-//     }
-//   };
 function formatNumber(numString) {
     const num = parseInt(numString.replace(".", ""));
-  
     if (num >= 1000000) {
       return `${(num / 1000000).toFixed(1)}M`;
     } else if (num >= 1000) {
@@ -113,34 +80,27 @@ function formatNumber(numString) {
       return num.toString();
     }
   }
-  
   const downloadFile = async (url, filename) => {
-    setIsDownloading(true); // Start download process
+    setIsDownloading(true);
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Failed to fetch the file");
       }
-
-      const blob = await response.blob(); // Get file as a Blob
+      const blob = await response.blob();
       const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob); // Create URL for Blob
-      link.download = filename; // Set filename for download
-      link.click(); // Trigger download
-
-      // Cleanup the object URL after download
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
       URL.revokeObjectURL(link.href);
     } catch (error) {
       console.error("Download failed:", error);
     } finally {
-      setIsDownloading(false); // Reset download status after completing
+      setIsDownloading(false);
     }
   };
-
   const handleSelectChange = (value, media) => {
-    setSelectedMedia(value);  // Set the selected media type
-
-    // Set the corresponding download URL and size
+    setSelectedMedia(value);
     switch (value) {
       case "original":
         setDownloadUrl(media.org);
@@ -159,7 +119,6 @@ function formatNumber(numString) {
         setDownloadSize("");
     }
   };
-
   return (
     <section className="w-full ">
       <div className="w-full flex flex-col items-center">
@@ -195,10 +154,9 @@ function formatNumber(numString) {
           </Alert>
         )}
       </div>
-
       {videoData && (
         <div className="mt-6 w-full space-y-6 ">
-        {/* Video Player */}
+        {}
         <div className="relative overflow-hidden flex justify-center items-center rounded-lg ">
           <video
             controls
@@ -206,10 +164,7 @@ function formatNumber(numString) {
             src={videoData.meta.media[0]?.org || ""}
           />
         </div>
-     
-      
-
-          {/* Video Details */}
+          {}
           <div className="space-y-2">
             <h3 className="text-sm font-bold"><span className="text-gray-700">Caption</span>:<br/>
             {videoData.title}
@@ -231,7 +186,6 @@ function formatNumber(numString) {
     <p className="flex items-center justify-center gap-1"><FaShare /> {shared || 0}</p>
             </div>
           </div>
-
           {audioUrl && (
         <div className="audio-container">
           <h2>song : {videoData.music.author} - {videoData.music.title}</h2>
@@ -241,7 +195,7 @@ function formatNumber(numString) {
           </audio>
         </div>
       )}
-          {/* Download Options */}
+          {}
           <div className="space-y-4">
       {videoData.meta.media.map((media, index) => (
           <div
@@ -250,9 +204,8 @@ function formatNumber(numString) {
           >
           <h2 className="font-bold text-md">Download Video</h2>
            <p className="text-sm font-medium mb-2">Size: {downloadSize}</p>
-
           <div className="flex space-x-2 items-center justify-center flex-wrap space-y-2">
-            {/* Select Dropdown for media options */}
+            {}
             <Select onValueChange={(value) => handleSelectChange(value, media)}>
               <SelectTrigger className="bg-gray-200 text-black p-2 rounded-lg outline-none">
                 <SelectValue placeholder="Choose Media" className="outline-none" />
@@ -269,17 +222,16 @@ function formatNumber(numString) {
                 )}
               </SelectContent>
             </Select>
-
             {selectedMedia && downloadUrl && (
         <button
           onClick={() =>
             downloadFile(downloadUrl, `${videoData.title}_${selectedMedia}.mp4`)
           }
           className="bg-blue-500 text-white px-4 py-2 self-start rounded-lg text-nowrap flex items-center justify-center w-full"
-          disabled={isDownloading} // Disable button during download
+          disabled={isDownloading}
         >
           {isDownloading ? (
-            <FaSpinner className="animate-spin" /> // Spinner during download
+            <FaSpinner className="animate-spin" />
           ) : (
             <>
               Download{" "}
@@ -293,7 +245,7 @@ function formatNumber(numString) {
       ))}
     </div>
           {audioUrl && (
-              <div className="flex justify-between p-4 bg-gray-100 rounded-lg">
+              <div className="flex justify-between p-4 bg-gray-100 rounded-lg items-center">
                  <div className="flex flex-col">
                      <h2 className="font-bold text-md">Download Audio</h2>
                                      <p className="text-sm font-medium">Audios are downloaded in Mp3</p>
@@ -308,4 +260,3 @@ function formatNumber(numString) {
     </section>
   );
 }
-
