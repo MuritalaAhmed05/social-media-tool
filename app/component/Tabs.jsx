@@ -26,10 +26,13 @@ import YouTubeToMp3 from "../YouTube/YouTubeToMp3"
 import YouTubeToMp4 from "../YouTube/YouTubeToMp4"
 import YouTubeSearch from "../YouTube/YouTubeSearch"
 import FaceBookDownload from "../FaceBook/FaceBookDownload"
+import SpotifyDownload from "../Spotify/SpotifyDownload"
+import SpotifyPlayListDownloader from "../Spotify/SpotifyPlayListDownloader"
+import SpotifyAlbumDownloader from "../Spotify/SpotifyAlbumDownloader"
 
 export function TabsDemo() {
   return (
-    <Tabs defaultValue="TikTok" className="w-full overflow-x-auto ">
+    <Tabs defaultValue="TikTok" className="w-full">
  <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 grid-rows-2 p-5 gap-9 mb-[4rem]">
   <TabsTrigger value="TikTok" >TikTok</TabsTrigger>
   <TabsTrigger value="Instagram" >Instagram</TabsTrigger>
@@ -65,7 +68,7 @@ export function TabsDemo() {
 <TikTokDownloader className="w-full"/>
           </CardContent>
           <CardFooter>
-            <Button>Save changes</Button>
+            {/* <Button>Save changes</Button> */}
           </CardFooter>
         </Card>
       </TabsContent>
@@ -89,7 +92,7 @@ export function TabsDemo() {
           </CardContent>
           
           <CardFooter>
-            <Button>Save password</Button>
+            {/* <Button>Save password</Button> */}
           </CardFooter>
         </Card>
       </TabsContent>
@@ -108,7 +111,7 @@ export function TabsDemo() {
            <TikTokSearch />
           </CardContent>
           <CardFooter>
-            <Button>Save password</Button>
+            {/* <Button>Save password</Button> */}
           </CardFooter>
         </Card>
       </TabsContent>
@@ -396,28 +399,39 @@ export function TabsDemo() {
       </TabsList>
       <TabsContent value="Spotify Downloader">
       <CardTitle>Spotify Downloader</CardTitle>
-      <Tabs defaultValue="Spotify Playlist" className="w-full">
-      <TabsList className="grid w-full grid-cols-2">
+      <Tabs defaultValue="Spotify Downloader" className="w-full">
+      <TabsList className="grid w-full grid-cols-3">
+        <TabsTrigger value="Spotify Downloader">Spotify Downloader</TabsTrigger>
         <TabsTrigger value="Spotify Playlist">Spotify Playlist</TabsTrigger>
         <TabsTrigger value="Spotify Album">Spotify Album</TabsTrigger>
       </TabsList>
+      <TabsContent value="Spotify Downloader">
+        <Card>
+          <CardHeader>
+            <CardTitle>Spotify Downloader</CardTitle>
+            <CardDescription>
+              Change your Spotify Downloader here. After saving, you'll be logged out.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <SpotifyDownload/>
+          </CardContent>
+          <CardFooter>
+            <Button>Save changes</Button>
+          </CardFooter>
+        </Card>
+      </TabsContent>
+
       <TabsContent value="Spotify Playlist">
         <Card>
           <CardHeader>
             <CardTitle>Spotify Playlist</CardTitle>
             <CardDescription>
-              Make changes to your Spotify Downloader here. Click save when you're done.
+              Change your Spotify Playlist here. After saving, you'll be logged out.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
+            <SpotifyPlayListDownloader/>
           </CardContent>
           <CardFooter>
             <Button>Save changes</Button>
@@ -432,18 +446,12 @@ export function TabsDemo() {
           <CardHeader>
             <CardTitle>Spotify Album</CardTitle>
             <CardDescription>
-              Change your TikTok Search here. After saving, you'll be logged out.
+           Change your Spotify Album here. After saving, you'll be logged out.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+           
+            <SpotifyAlbumDownloader/>
           </CardContent>
           <CardFooter>
             <Button>Save password</Button>
