@@ -85,7 +85,7 @@ export default function SpotifyDownload() {
 
                     <button
                         onClick={handleDownload}
-                        className="mt-4 bg-blue-500 text-white p-2 rounded-md flex items-center justify-center space-x-2"
+                        className="mt-4 bg-black text-white p-2 rounded-md flex items-center justify-center space-x-2"
                     >
                         <AiOutlineDownload />
                         <span>Download MP3</span>
