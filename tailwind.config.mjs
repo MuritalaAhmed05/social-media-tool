@@ -16,6 +16,14 @@ export default {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
   			},
+			  light: {
+				tablist: '#F5F5F5',
+				tabtrigger: '#FFFFFF',
+			  },
+			  dark: {
+				tablist: '#262626',
+				tabtrigger: '#0A0A0A',
+			  },
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',
   				foreground: 'hsl(var(--popover-foreground))'

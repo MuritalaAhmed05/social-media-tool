@@ -21,11 +21,16 @@ import TikTokSearch from "../TikTok/TikTokSearch"
 import InstagramDownload from "../Instagram/InstagramDownload"
 import InstagramStalk from "../Instagram/InstagramStalk"
 import XDownload from "../X/XDownload"
+import YouTubeDownload from "../YouTube/YouTubeDownload"
+import YouTubeToMp3 from "../YouTube/YouTubeToMp3"
+import YouTubeToMp4 from "../YouTube/YouTubeToMp4"
+import YouTubeSearch from "../YouTube/YouTubeSearch"
+import FaceBookDownload from "../FaceBook/FaceBookDownload"
 
 export function TabsDemo() {
   return (
-    <Tabs defaultValue="TikTok" className="w-full overflow-x-auto">
-   <TabsList className="grid w-full grid-cols-6">
+    <Tabs defaultValue="TikTok" className="w-full overflow-x-auto ">
+ <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 grid-rows-2 p-5 gap-9 mb-[4rem]">
   <TabsTrigger value="TikTok" >TikTok</TabsTrigger>
   <TabsTrigger value="Instagram" >Instagram</TabsTrigger>
   <TabsTrigger value="X" >X</TabsTrigger>
@@ -199,7 +204,7 @@ export function TabsDemo() {
             <CardTitle>YouTube</CardTitle>
             <CardDescription>
             <Tabs defaultValue="YouTube Downloader" className="w-full">
-      <TabsList className="grid w-full grid-cols-6">
+      <TabsList className="grid grid-cols-2 grid-rows-3 gap-9 mb-[5rem] p-5">
         <TabsTrigger value="YouTube Downloader">YouTube Downloader</TabsTrigger>
         <TabsTrigger value="Youtube Music Search">Youtube Music Search</TabsTrigger>
         <TabsTrigger value="YouTube Music Album">YouTube Music Album</TabsTrigger>
@@ -212,18 +217,12 @@ export function TabsDemo() {
           <CardHeader>
             <CardTitle>YouTube Downloader</CardTitle>
             <CardDescription>
-              Make changes to your YouTube Downloader here. Click save when you're done.
+              Download any YouTube video here.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
+            
+            <YouTubeDownload/>
           </CardContent>
           <CardFooter>
             <Button>Save changes</Button>
@@ -288,18 +287,12 @@ export function TabsDemo() {
           <CardHeader>
             <CardTitle>To Mp3</CardTitle>
             <CardDescription>
-              Change your YouTube Search here. After saving, you'll be logged out.
+              Convert YouTube video to MP3 here.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+            
+            <YouTubeToMp3 />
           </CardContent>
           <CardFooter>
             <Button>Save password</Button>
@@ -312,18 +305,11 @@ export function TabsDemo() {
           <CardHeader>
             <CardTitle>To Mp4</CardTitle>
             <CardDescription>
-              Change your YouTube Search here. After saving, you'll be logged out.
+              Convert YouTube video to MP3 here.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+          <YouTubeToMp4 />
           </CardContent>
           <CardFooter>
             <Button>Save password</Button>
@@ -337,18 +323,11 @@ export function TabsDemo() {
           <CardHeader>
             <CardTitle>YouTube Search</CardTitle>
             <CardDescription>
-              Change your YouTube Search here. After saving, you'll be logged out.
+              Search YouTube videos here.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+           <YouTubeSearch/>
           </CardContent>
           <CardFooter>
             <Button>Save password</Button>
@@ -372,28 +351,36 @@ export function TabsDemo() {
       <TabsContent value="FaceBook">
         <Card>
           <CardHeader>
-            <CardTitle>FaceBook</CardTitle>
+            <CardTitle>FaceBook Downloader</CardTitle>
             <CardDescription>
-              Change your password here. After saving, you'll be logged out.
+            <Tabs defaultValue="FaceBook Downloader" className="w-full">
+      <TabsList className="grid w-full">
+        <TabsTrigger value="FaceBook Downloader" className="w-full">FaceBook Downloader</TabsTrigger>
+        {/* <TabsTrigger value="Instagram Stalk">Instagram Stalk</TabsTrigger> */}
+      </TabsList>
+      <TabsContent value="FaceBook Downloader">
+        <Card>
+          <CardHeader>
+            <CardTitle className="w-full">FaceBook Downloader</CardTitle>
+            <CardDescription>
+            Download any FaceBook video here.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+          <FaceBookDownload/>
           </CardContent>
           <CardFooter>
-            <Button>Save password</Button>
+            <Button>Save changes</Button>
           </CardFooter>
         </Card>
       </TabsContent>
 
-
+      </Tabs>
+            </CardDescription>
+          </CardHeader>
+         
+        </Card>
+      </TabsContent>
 
 
 
