@@ -87,7 +87,7 @@ export default function SpotifyPlayListDownloader() {
             <img
                 src={playlistData.data.image}
                 alt={playlistData.data.name}
-                className="max-h-32 md:max-h-sm max-w-32 md:max-w-sm rounded-md shadow-lg mb-2"
+                className="max-h-42 md:max-h-sm max-w-42 md:max-w-sm rounded-md shadow-lg"
             />
             <div className="text-center sm:text-left">
                 <h3 className="text-xl font-semibold">{playlistData.data.name}</h3>

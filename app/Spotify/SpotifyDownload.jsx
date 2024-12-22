@@ -44,7 +44,7 @@ export default function SpotifyDownload() {
     };
 
     return (
-        <div className="w-full flex flex-col items-center p-5">
+        <div className="w-full flex flex-col items-center">
             <input
                 type="text"
                 placeholder="Enter Spotify Track URL"
