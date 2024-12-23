@@ -33,6 +33,7 @@ import SpotifySearch from "../Spotify/SpotifySearch"
 import SpotifyPlayListSearch from "../Spotify/SpotifyPlayListSearch"
 import SpotifyAlbumSearch from "../Spotify/SpotifyAlbumSearch"
 import YouTubeMusicSearch from "../YouTube/YouTubeMusicSearch"
+import YouTubeMusicAlbum from "../YouTube/YouTubeMusicAlbum"
 
 export function TabsDemo() {
   return (
@@ -213,7 +214,7 @@ export function TabsDemo() {
             <Tabs defaultValue="YouTube Downloader" className="w-full">
             <TabsList className="grid grid-cols-2 md:grid-cols-6 grid-rows-3 gap-9 mb-[5rem] p-5">
         <TabsTrigger value="YouTube Downloader">YouTube Downloader</TabsTrigger>
-        <TabsTrigger value="Youtube Music Search">Youtube Music Search</TabsTrigger>
+        <TabsTrigger value="MusicSearch">Youtube Music Search</TabsTrigger>
         <TabsTrigger value="YouTube Music Album">YouTube Music Album</TabsTrigger>
         <TabsTrigger value="To Mp3">To Mp3</TabsTrigger>
         <TabsTrigger value="To Mp4">To Mp4</TabsTrigger>
@@ -238,7 +239,7 @@ export function TabsDemo() {
       </TabsContent>
 
 
-      <TabsContent value="YouTube Music Search">
+      <TabsContent value="MusicSearch">
         <Card>
           <CardHeader>
             <CardTitle>YouTube Music Search</CardTitle>
@@ -265,14 +266,7 @@ export function TabsDemo() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
+          <YouTubeMusicAlbum/>
           </CardContent>
           <CardFooter>
             <Button>Save changes</Button>
