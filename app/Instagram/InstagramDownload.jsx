@@ -17,28 +17,28 @@ export default function InstagramDownload() {
     setLoading(true);
     setError('');
     try {
-      // API request to fetch the video details
-      const response = await fetch(`https://bk9.fun/download/instagram2?url=${encodeURIComponent(url)}`);
+      // API request to fetch the media details (image or video)
+      const response = await fetch(`https://deliriussapi-oficial.vercel.app/download/instagram?url=${encodeURIComponent(url)}`);
       const data = await response.json();
 
-      if (data.status) {
-        setDownloadData(data.BK9); // Set the video data from the API
+      if (data.status && data.data) {
+        setDownloadData(data.data); // Set the media data from the API
       } else {
-        setError('Failed to fetch video data. Please try again.');
+        setError('Failed to fetch media data. Please try again.');
       }
     } catch (err) {
-      console.error('Error fetching Instagram video:', err);
-      setError('An error occurred while fetching the video.');
+      console.error('Error fetching Instagram media:', err);
+      setError('An error occurred while fetching the media.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Function to trigger image download
-  const handleImageDownload = (imageUrl) => {
+  // Function to trigger download of the image or video
+  const handleDownloadMedia = (mediaUrl, fileName) => {
     const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = imageUrl.split('/').pop(); // Extract filename from URL
+    link.href = mediaUrl;
+    link.download = fileName;
     link.click();
   };
 
@@ -70,29 +70,36 @@ export default function InstagramDownload() {
         </button>
       </div>
 
-       {error && (
-              <Alert variant="destructive" className="w-full mt-4">
-                <AlertTitle>Error:</AlertTitle>
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
+      {error && (
+        <Alert>
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
 
-      {/* Image Gallery */}
-      {downloadData && !loading && (
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 place-items-center">
-          {downloadData.map((image, index) => (
-            <div key={index} className="justify-center flex flex-col items-center">
-              <a href={image.url} target="_blank" rel="noopener noreferrer" className='justify-center flex flex-col items-center'>
+      {downloadData && (
+        <div className="w-full flex flex-col items-center space-y-4">
+          {downloadData.map((media, index) => (
+            <div key={index} className="w-full flex flex-col items-center">
+              {media.type === "image" ? (
                 <img
-                  src={image.thumbnail}
-                  alt={`Instagram image ${index + 1}`}
-                  className="w-full h-auto object-cover  rounded-md shadow-lg mb-2 justify-center flex flex-col items-center"
+                  src={media.url}
+                  alt={`Instagram media ${index}`}
+                  className="rounded-md w-80 h-auto"
                 />
-              </a>
-              {/* Download Button */}
+              ) : media.type === "video" ? (
+                <video
+                  src={media.url}
+                  controls
+                  className="rounded-md w-80 h-auto"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              ) : null}
+
               <button
-                onClick={() => handleImageDownload(image.url)}
-                className="bg-black text-white p-2 rounded-md flex items-center justify-center space-x-2"
+                onClick={() => handleDownloadMedia(media.url, `instagram_media_${index}`)}
+                className="mt-4 p-3 bg-black text-white rounded-md flex items-center space-x-2"
               >
                 <AiOutlineDownload />
                 <span>Download</span>
