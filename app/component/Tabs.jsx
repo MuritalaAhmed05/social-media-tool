@@ -29,6 +29,10 @@ import FaceBookDownload from "../FaceBook/FaceBookDownload"
 import SpotifyDownload from "../Spotify/SpotifyDownload"
 import SpotifyPlayListDownloader from "../Spotify/SpotifyPlayListDownloader"
 import SpotifyAlbumDownloader from "../Spotify/SpotifyAlbumDownloader"
+import SpotifySearch from "../Spotify/SpotifySearch"
+import SpotifyPlayListSearch from "../Spotify/SpotifyPlayListSearch"
+import SpotifyAlbumSearch from "../Spotify/SpotifyAlbumSearch"
+import YouTubeMusicSearch from "../YouTube/YouTubeMusicSearch"
 
 export function TabsDemo() {
   return (
@@ -207,7 +211,7 @@ export function TabsDemo() {
             <CardTitle>YouTube</CardTitle>
             <CardDescription>
             <Tabs defaultValue="YouTube Downloader" className="w-full">
-      <TabsList className="grid grid-cols-2 grid-rows-3 gap-9 mb-[5rem] p-5">
+            <TabsList className="grid grid-cols-2 md:grid-cols-6 grid-rows-3 gap-9 mb-[5rem] p-5">
         <TabsTrigger value="YouTube Downloader">YouTube Downloader</TabsTrigger>
         <TabsTrigger value="Youtube Music Search">Youtube Music Search</TabsTrigger>
         <TabsTrigger value="YouTube Music Album">YouTube Music Album</TabsTrigger>
@@ -243,14 +247,7 @@ export function TabsDemo() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
+           <YouTubeMusicSearch/>
           </CardContent>
           <CardFooter>
             <Button>Save changes</Button>
@@ -482,14 +479,8 @@ export function TabsDemo() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
+          
+            <SpotifySearch/>
           </CardContent>
           <CardFooter>
             <Button>Save changes</Button>
@@ -508,14 +499,8 @@ export function TabsDemo() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+           
+            <SpotifyPlayListSearch />
           </CardContent>
           <CardFooter>
             <Button>Save password</Button>
@@ -532,14 +517,8 @@ export function TabsDemo() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
+            
+            <SpotifyAlbumSearch/>
           </CardContent>
           <CardFooter>
             <Button>Save password</Button>
