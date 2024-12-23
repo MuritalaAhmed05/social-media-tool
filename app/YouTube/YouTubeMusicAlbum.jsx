@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { FaSearch } from "react-icons/fa";
+import { FiLoader } from "react-icons/fi";
 export default function YouTubeMusicAlbum() {
   const [query, setQuery] = useState("");
   const [albums, setAlbums] = useState([]);
