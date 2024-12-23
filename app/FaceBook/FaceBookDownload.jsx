@@ -104,11 +104,11 @@ export default function FacebookDownload() {
       {/* Video Data Display */}
       {videoData && !loading && (
         <div className="mt-6 w-full flex flex-col items-center">
-       <img 
-    src={videoData.thumb} 
-    alt={videoData.title} 
-    className="w-full h-auto max-w-md mx-auto rounded-md shadow-lg mb-2" 
-/>
+         <video
+                  src={videoData.sd} // Use the video URL
+                  controls
+                  className="w-full max-w-md rounded-lg"
+                />
           <h3 className="text-xl font-semibold">{videoData.title}</h3>
           <p className="mt-2">{videoData.desc}</p>
 
@@ -142,3 +142,5 @@ export default function FacebookDownload() {
     </div>
   );
 }
+
+
