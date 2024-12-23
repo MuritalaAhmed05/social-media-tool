@@ -1,7 +1,8 @@
 "use client"; // Ensures this runs in the browser environment
 
 import React, { useState } from "react";
-
+import { FiLoader } from "react-icons/fi";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 export default function YouTubeDownload() {
   const [url, setUrl] = useState(""); // State to store the user input URL
   const [videoData, setVideoData] = useState(null); // State to store the fetched video data
@@ -55,26 +56,38 @@ export default function YouTubeDownload() {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-8 p-4 bg-black text-white rounded-lg shadow-lg">
-      <h2 className="text-xl font-semibold text-center mb-4">YouTube Video Downloader</h2>
+    <div className="w-full space-y-4">
+ 
 
       <input
         type="text"
         value={url}
         onChange={handleInputChange}
         placeholder="Enter YouTube URL"
-        className="w-full p-2 rounded-lg border border-gray-300 mb-4"
+        className="w-full p-2 rounded-lg border border-gray-300"
       />
       
       <button
         onClick={handleFetchData}
         disabled={loading}
-        className="w-full p-3 bg-blue-500 text-white rounded-lg mt-4 disabled:bg-gray-400"
+        className="w-full p-3 bg-black text-white rounded-lg mt-4 disabled:bg-gray-400"
       >
-        {loading ? "Loading..." : "Fetch Video Data"}
+        {loading ? (
+                   <>
+                     <FiLoader className="animate-spin mr-2" />
+                     Downloading...
+                   </>
+                 ) : (
+                   "Download"
+                 )}
       </button>
 
-      {error && <p className="text-red-500 mt-2">{error}</p>}
+    {error && (
+           <Alert variant="destructive" className="w-full mt-4">
+             <AlertTitle>Error</AlertTitle>
+             <AlertDescription>{error}</AlertDescription>
+           </Alert>
+         )}
 
       {videoData && (
         <div className="mt-6">
