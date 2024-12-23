@@ -35,7 +35,7 @@ export default function YouTubeMusicAlbum() {
     <div className="w-full">
       <div className="w-full">
        
-        <div className="flex gap-2 mb-4">
+        <div className="flex flex-col gap-2 mb-4">
           <Input
             type="text"
             placeholder="Search for an album"
@@ -85,13 +85,13 @@ export default function YouTubeMusicAlbum() {
                   <p className="text-gray-500">{album.year}</p>
                   <p className="text-gray-400 italic">{album.type}</p>
               </div>
-              <iframe
-  src="https://music.youtube.com/playlist?list=${album.albumId}"
-  frameborder="0"
-  allow="autoplay; encrypted-media"
-  allowfullscreen
-  class="mt-4 w-full h-64 rounded-lg"
-></iframe>
+              <a href="https://music.youtube.com/playlist?list=${album.albumId}"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="mt-4 px-4 py-2 bg-black text-white rounded-lg hover:bg-black">
+         Listen on YouTube Music
+      </a>
+
 
             </div>
           ))}
