@@ -9,9 +9,9 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
   return (
-    <header className="shadow-md">
+    <header className="shadow-lg">
       <div className="container mx-auto flex justify-between items-center p-4 md:p-6">
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center  space-x-2 sm:space-x-4">
   <Image
     src="/favicon.webp"
     alt="Logo"
