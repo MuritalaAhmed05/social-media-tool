@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 
 const TikTokAudioFetcher = () => {
-  const [videoUrl, setVideoUrl] = useState(""); // The video URL to be fetched
-  const [audioUrl, setAudioUrl] = useState(null); // To store the audio URL
-  const [loading, setLoading] = useState(false); // To track loading state
-  const [error, setError] = useState(""); // To store any errors
+  const [videoUrl, setVideoUrl] = useState(""); 
+  // The video URL to be fetched
+  const [audioUrl, setAudioUrl] = useState(null); 
+  // To store the audio URL
+  const [loading, setLoading] = useState(false); 
+  // To track loading state
+  const [error, setError] = useState(""); 
+  // To store any errors
 
   const fetchAudio = async () => {
     if (!videoUrl) {
@@ -13,7 +17,8 @@ const TikTokAudioFetcher = () => {
     }
 
     setLoading(true);
-    setError(""); // Reset the error message
+    setError(""); 
+    // Reset the error message
 
     try {
       const audioResponse = await fetch(
@@ -30,11 +35,13 @@ const TikTokAudioFetcher = () => {
         throw new Error("Audio is not available for this video.");
       }
 
-      setAudioUrl(audioData.BK9.audio); // Set the audio URL from the response
+      setAudioUrl(audioData.BK9.audio); 
+      // Set the audio URL from the response
     } catch (err) {
       setError(err.message || "An unexpected error occurred.");
     } finally {
-      setLoading(false); // Stop loading once the fetch is complete
+      setLoading(false); 
+      // Stop loading once the fetch is complete
     }
   };
 
@@ -45,7 +52,8 @@ const TikTokAudioFetcher = () => {
         type="text"
         placeholder="Enter TikTok video URL"
         value={videoUrl}
-        onChange={(e) => setVideoUrl(e.target.value)} // Handle input change
+        onChange={(e) => setVideoUrl(e.target.value)} 
+        // Handle input change
         className="input-url"
       />
       <button onClick={fetchAudio} disabled={loading} className="fetch-button">

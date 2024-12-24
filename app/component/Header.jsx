@@ -1,19 +1,28 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { ModeToggle } from "./ThemeBtn"; // Assuming you have a theme toggle component
-
+import { ModeToggle } from "./ThemeBtn";
+import Image from "next/image";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
   return (
     <header className="shadow-md">
       <div className="container mx-auto flex justify-between items-center p-4 md:p-6">
-        <div className="text-2xl font-bold">MyLogo</div>
+      <div className="flex items-center space-x-4">
+  <Image
+    src="/favicon.webp"
+    alt="Logo"
+    width={40}
+    height={40}
+    className="rounded-full"
+  />
+  <span className="text-2xl font-bold font-noto-sans">VidGrab</span>
+</div>
+
+
         <nav className="hidden md:flex items-center space-x-8">
           <Link
             href="/"
@@ -70,7 +79,7 @@ export default function Header() {
           </button>
         </div>
       </div>
-      {/* Mobile Menu */}
+      {}
       <div
         className={`md:hidden ${
           isOpen ? "block" : "hidden"

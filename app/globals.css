@@ -1,3 +1,6 @@
+/* Add this in your globals.css or main CSS file */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { ThemeProvider } from "../component/ThemeProvider";
-
 const features = [
   {
     title: "No Watermark",
@@ -29,7 +28,6 @@ const features = [
       "A simple, user-friendly interface that anyone can navigate, making it effortless to find and download content.",
   },
 ];
-
 export default function About() {
   return (
     <ThemeProvider
