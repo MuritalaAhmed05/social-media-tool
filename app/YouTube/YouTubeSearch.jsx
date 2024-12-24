@@ -101,7 +101,9 @@ export default function YouTubeSearch() {
             <div className="p-4 text-left">
               <h3 className="text-xl font-semibold">{video.title}</h3>
               <p className="text-sm">{video.description}</p>
-              <p className="text-sm text-gray-400">Duration: {video.duration}</p>
+              <p className="text-sm text-gray-400">
+                Duration: {video.duration}
+              </p>
               <p className="text-sm text-gray-400">Views: {video.views}</p>
             </div>
             <div className="p-4">

@@ -23,7 +23,7 @@ export default function Contact() {
     const whatsappUrl = `https://wa.me/2349020507509?text=${encodeURIComponent(
       whatsappMessage
     )}`;
-    
+
     // Open WhatsApp link
     window.open(whatsappUrl, "_blank");
   };
@@ -39,14 +39,18 @@ export default function Contact() {
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-center mb-6">Contact Us</h1>
           <p className="text-lg text-center mb-8">
-            We'd love to hear from you! Please fill out the form below, and we'll get back to you as soon as possible.
+            We'd love to hear from you! Please fill out the form below, and
+            we'll get back to you as soon as possible.
           </p>
           <form
             className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6"
             onSubmit={handleSubmit}
           >
             <div className="mb-4">
-              <label htmlFor="name" className="block text-lg font-semibold mb-2">
+              <label
+                htmlFor="name"
+                className="block text-lg font-semibold mb-2"
+              >
                 Name
               </label>
               <input

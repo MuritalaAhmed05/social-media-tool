@@ -51,10 +51,9 @@ export default function SpotifyPlayListSearch() {
   return (
     <div className="w-full flex flex-col items-center">
       {/* Alert for empty input */}
-      
 
       {/* Search Bar */}
-      <div className="w-full flex flex-col items-center space-y-4 mb-8">
+      <div className="w-full flex flex-col items-center space-y-4 mb-4">
         <Input
           type="text"
           placeholder="Search for playlists..."

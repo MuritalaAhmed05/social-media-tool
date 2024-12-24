@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FiLoader } from "react-icons/fi";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { AiOutlineDownload } from "react-icons/ai";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -47,18 +49,15 @@ export default function SpotifyAlbumSearch() {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="w-full space-y-4 mb-8">
-        <input
+      <div className="w-full space-y-4 mb-4">
+        <Input
           type="text"
           placeholder="Search for an album"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="p-2 border w-full border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+          className="w-full"
         />
-        <button
-          onClick={handleSearch}
-          className="p-3 bg-black w-full text-white rounded-md flex items-center justify-center space-x-2"
-        >
+        <Button onClick={handleSearch} className="w-full bg-black text-white">
           {loading ? (
             <>
               <FiLoader className="animate-spin mr-1" />
@@ -70,11 +69,11 @@ export default function SpotifyAlbumSearch() {
               <span>Search</span>
             </>
           )}
-        </button>
+        </Button>
       </div>
 
       {error && (
-        <Alert variant="destructive" className="w-full mt-4">
+        <Alert variant="destructive" className="w-full">
           <AlertTitle>Error:</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
@@ -82,39 +81,41 @@ export default function SpotifyAlbumSearch() {
 
       {/* Album Gallery */}
       {albums && !loading && (
-  <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 place-items-center">
-    {albums.map((album, index) => (
-      <div key={index} className="flex flex-col items-start bg-black shadow-lg p-4 rounded-lg w-full">
-        <a
-          href={album.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full"
-        >
-          <img
-            src={album.image}
-            alt={album.name}
-            className="w-full h-auto object-cover rounded-md shadow-md mb-4"
-          />
-        </a>
-        <div className="text-left space-y-2 w-full">
-          <h2 className="text-lg font-bold text-white">{album.name}</h2>
-          <p className="text-gray-300">Artist: {album.artists}</p>
-          <p className="text-gray-300">Published: {album.publish}</p>
-          <p className="text-gray-300">Tracks: {album.tracks}</p>
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 place-items-center">
+          {albums.map((album, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-start bg-black shadow-lg p-4 rounded-lg w-full"
+            >
+              <a
+                href={album.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
+              >
+                <img
+                  src={album.image}
+                  alt={album.name}
+                  className="w-full h-auto object-cover rounded-md shadow-md mb-4"
+                />
+              </a>
+              <div className="text-left space-y-2 w-full">
+                <h2 className="text-lg font-bold text-white">{album.name}</h2>
+                <p className="text-gray-300">Artist: {album.artists}</p>
+                <p className="text-gray-300">Published: {album.publish}</p>
+                <p className="text-gray-300">Tracks: {album.tracks}</p>
+              </div>
+              <button
+                onClick={() => handleDownload(album.url)}
+                className="bg-black shadow-2xl text-white p-2 rounded-md flex items-center justify-center space-x-2 mt-2"
+              >
+                <AiOutlineDownload />
+                <span>Download</span>
+              </button>
+            </div>
+          ))}
         </div>
-        <button
-          onClick={() => handleDownload(album.url)}
-          className="bg-black shadow-2xl text-white p-2 rounded-md flex items-center justify-center space-x-2 mt-2"
-        >
-          <AiOutlineDownload />
-          <span>Download</span>
-        </button>
-      </div>
-    ))}
-  </div>
-)}
-
+      )}
     </div>
   );
 }

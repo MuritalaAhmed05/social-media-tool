@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { FiLoader } from "react-icons/fi";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 export default function YouTubeToMp4() {
   const [videoUrl, setVideoUrl] = useState("");
   const [videoData, setVideoData] = useState(null);
@@ -21,7 +22,9 @@ export default function YouTubeToMp4() {
 
     try {
       const response = await fetch(
-        `https://api.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(videoUrl)}`
+        `https://api.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(
+          videoUrl
+        )}`
       );
       const data = await response.json();
 
@@ -40,14 +43,14 @@ export default function YouTubeToMp4() {
   return (
     <div className="flex flex-col items-center text-black">
       <header className="w-full  space-y-4">
-        <input
+        <Input
           type="text"
           placeholder="Enter YouTube URL"
           value={videoUrl}
           onChange={(e) => setVideoUrl(e.target.value)}
-          className="w-full p-3 rounded-md border border-gray-400 focus:ring-2 focus:ring-black"
+          className="w-full mb-4"
         />
-        <button
+        <Button
           onClick={handleDownload}
           className="w-full bg-black text-white p-3 rounded-md flex items-center justify-center"
           disabled={loading}
@@ -60,7 +63,7 @@ export default function YouTubeToMp4() {
           ) : (
             "Convert to MP4"
           )}
-        </button>
+        </Button>
       </header>
 
       {error && (

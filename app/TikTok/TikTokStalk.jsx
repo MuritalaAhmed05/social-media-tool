@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FiHeart, FiUser, FiVideo, FiUsers, FiLoader } from "react-icons/fi"; // Importing necessary icons
 import { MdVerified } from "react-icons/md";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Input } from "@/components/ui/input";
 import { FaSearch } from "react-icons/fa";
 const TikTokProfile = () => {
   const [username, setUsername] = useState(""); // State for TikTok username
@@ -59,35 +60,35 @@ const TikTokProfile = () => {
     <div className="w-full">
       {/* Input Field */}
       <div className="w-full flex flex-col items-center">
-        <input
+        <Input
           type="text"
           placeholder="Enter TikTok Username"
           value={username}
           onChange={handleInputChange}
-          className="w-full mb-4 p-3 rounded-lg border border-black text-md focus:outline-none focus:ring-2 focus:ring-black focus:border-black transition-all"
+          className="w-full mb-4"
         />
         <Button
           onClick={handleSearch}
-          className="w-full bg-black text-white mb-5"
+          className="w-full bg-black text-white"
           disabled={loading}
         >
-           {loading ? (
-                       <>
-                         <FiLoader className="animate-spin mr-2" />
-                         Searching...
-                       </>
-                     ) : (
-                       <>
-                         <FaSearch  className="mr-2" />
-                         Search 
-                       </>
-                     )}
+          {loading ? (
+            <>
+              <FiLoader className="animate-spin mr-2" />
+              Searching...
+            </>
+          ) : (
+            <>
+              <FaSearch className="mr-2" />
+              Search
+            </>
+          )}
         </Button>
       </div>
 
       {/* Error State */}
       {error && (
-        <Alert variant="destructive" className="w-full mt-1">
+        <Alert variant="destructive" className="w-full mt-4">
           <AlertTitle>Error:</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
@@ -105,7 +106,9 @@ const TikTokProfile = () => {
               />
               <AvatarFallback>Loading..</AvatarFallback>
             </Avatar>
-            <h2 className="text-2xl font-semibold">{profileData.users.nickname}</h2>
+            <h2 className="text-2xl font-semibold">
+              {profileData.users.nickname}
+            </h2>
             <p className="text-lg text-gray-500 whitespace-pre-line text-center">
               {profileData.users.signature}
             </p>

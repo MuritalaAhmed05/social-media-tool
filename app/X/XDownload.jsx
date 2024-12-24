@@ -3,9 +3,30 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { FaComments, FaRetweet, FaHeart, FaEye, FaSearch, FaMapMarkerAlt, FaRegCheckCircle, FaUsers, FaListUl, FaImages, FaTwitter, FaInfoCircle, FaSpinner } from "react-icons/fa";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"; // Assuming this is a custom Select component
-
+import {
+  FaComments,
+  FaRetweet,
+  FaHeart,
+  FaEye,
+  FaSearch,
+  FaMapMarkerAlt,
+  FaRegCheckCircle,
+  FaUsers,
+  FaListUl,
+  FaImages,
+  FaTwitter,
+  FaInfoCircle,
+  FaSpinner,
+} from "react-icons/fa";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select"; // Assuming this is a custom Select component
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 export default function XDownload() {
   const [url, setUrl] = useState("");
   const [data, setData] = useState(null);
@@ -27,7 +48,9 @@ export default function XDownload() {
       setData(null);
 
       const response = await axios.get(
-        `https://deliriussapi-oficial.vercel.app/download/twitterv2?url=${encodeURIComponent(url)}`
+        `https://deliriussapi-oficial.vercel.app/download/twitterv2?url=${encodeURIComponent(
+          url
+        )}`
       );
 
       const result = response.data;
@@ -40,7 +63,8 @@ export default function XDownload() {
     } catch (err) {
       console.error(err);
       setError(
-        err.response?.data?.message || "Failed to fetch media. Please try again."
+        err.response?.data?.message ||
+          "Failed to fetch media. Please try again."
       );
     } finally {
       setLoading(false);
@@ -94,58 +118,71 @@ export default function XDownload() {
             alt="Twitter Media"
             className="max-w-full rounded-lg shadow-md"
           />
-          <button
+          <Button
             onClick={() => downloadFile(media.image, "image.jpg")}
             className="mt-4 bg-black text-white px-4 py-2 rounded-lg"
             disabled={isDownloading}
           >
-            {isDownloading ? <FaSpinner className="animate-spin" /> : "Download Image"}
-          </button>
+            {isDownloading ? (
+              <FaSpinner className="animate-spin" />
+            ) : (
+              "Download Image"
+            )}
+          </Button>
         </div>
       );
     } else if (media.type === "video") {
       return (
         <div className="flex flex-col items-center">
-      {/* Video player */}
-      <video controls poster={media.cover} className="max-w-full rounded-lg shadow-md">
-        {media.videos.map((video, index) => (
-          <source key={index} src={video.url} type="video/mp4" />
-        ))}
-      </video>
+          {/* Video player */}
+          <video
+            controls
+            poster={media.cover}
+            className="max-w-full rounded-lg shadow-md"
+          >
+            {media.videos.map((video, index) => (
+              <source key={index} src={video.url} type="video/mp4" />
+            ))}
+          </video>
 
-      {/* Select quality dropdown */}
-      <Select onValueChange={handleSelectChange}>
-        <SelectTrigger className="bg-gray-200 text-black p-2 rounded-lg outline-none mt-4">
-          <SelectValue placeholder="Choose Media Quality" />
-        </SelectTrigger>
-        <SelectContent className="bg-white border rounded-lg outline-none">
-          {media.videos.map((video, index) => (
-            <SelectItem key={index} value={video.quality}>
-              {video.quality} ({(video.bitrate / 1000).toFixed(0)} Kbps)
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+          {/* Select quality dropdown */}
+          <Select onValueChange={handleSelectChange}>
+            <SelectTrigger className="bg-gray-200 text-black p-2 rounded-lg outline-none mt-4">
+              <SelectValue placeholder="Choose Media Quality" />
+            </SelectTrigger>
+            <SelectContent className="bg-white border rounded-lg outline-none">
+              {media.videos.map((video, index) => (
+                <SelectItem key={index} value={video.quality}>
+                  {video.quality} ({(video.bitrate / 1000).toFixed(0)} Kbps)
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
-      {/* Download button */}
-      <button
-        onClick={() => {
-          const selectedVideo = media.videos.find((video) => video.quality === selectedQuality);
-          if (selectedVideo) {
-            // Trigger the download using the selected quality
-            downloadFile(selectedVideo.url, `${selectedVideo.quality}_video.mp4`);
-          }
-        }}
-        className="mt-4 bg-black text-white p-3 rounded-lg flex justify-center items-center w-full"
-        disabled={isDownloading}
-      >
-        {isDownloading ? (
-          <FaSpinner className="animate-spin text-white" /> // Display the spinner while downloading
-        ) : (
-          "Download Video"
-        )}
-      </button>
-    </div>
+          {/* Download button */}
+          <button
+            onClick={() => {
+              const selectedVideo = media.videos.find(
+                (video) => video.quality === selectedQuality
+              );
+              if (selectedVideo) {
+                // Trigger the download using the selected quality
+                downloadFile(
+                  selectedVideo.url,
+                  `${selectedVideo.quality}_video.mp4`
+                );
+              }
+            }}
+            className="mt-4 bg-black text-white p-3 rounded-lg flex justify-center items-center w-full"
+            disabled={isDownloading}
+          >
+            {isDownloading ? (
+              <FaSpinner className="animate-spin text-white" /> // Display the spinner while downloading
+            ) : (
+              "Download Video"
+            )}
+          </button>
+        </div>
       );
     } else {
       return <p>Unsupported media type.</p>;
@@ -156,16 +193,16 @@ export default function XDownload() {
     <div className="w-full">
       {/* Input Section */}
       <div className="w-full flex flex-col items-center">
-        <input
+        <Input
           type="text"
           placeholder="Enter Twitter URL"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          className="w-full mb-4 p-3 text-black rounded-md border border-gray-600"
+          className="w-full mb-4"
         />
-        <button
+        <Button
           onClick={fetchMedia}
-          className="w-full bg-black text-white p-3 rounded-md flex justify-center items-center"
+          className="w-full bg-black text-white"
           disabled={loading}
         >
           {loading ? (
@@ -178,7 +215,7 @@ export default function XDownload() {
               <FaSearch className="mr-2" /> Search
             </>
           )}
-        </button>
+        </Button>
       </div>
 
       {/* Error Alert */}
@@ -195,7 +232,9 @@ export default function XDownload() {
           {/* Media Details */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg font-semibold">Media Details</CardTitle>
+              <CardTitle className="text-lg font-semibold">
+                Media Details
+              </CardTitle>
             </CardHeader>
             <CardContent>
               {data.media && data.media.length > 0 ? (
@@ -213,7 +252,9 @@ export default function XDownload() {
           {/* Post Statistics */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg font-semibold">Post Statistics</CardTitle>
+              <CardTitle className="text-lg font-semibold">
+                Post Statistics
+              </CardTitle>
             </CardHeader>
             <CardContent className="grid grid-cols-2 gap-4">
               <div className="flex items-center gap-2">
@@ -238,7 +279,9 @@ export default function XDownload() {
           {/* Profile Details */}
           <Card className="w-full p-0">
             <CardHeader>
-              <CardTitle className="text-lg font-semibold">Profile Details</CardTitle>
+              <CardTitle className="text-lg font-semibold">
+                Profile Details
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Profile Banner */}
@@ -275,46 +318,54 @@ export default function XDownload() {
               <div className="flex items-center gap-2 text-sm text-gray-500">
                 <FaMapMarkerAlt />
                 <span>{data.author.location || "No location"}</span>
-                {data.author.verified && <FaRegCheckCircle className="text-blue-500" />}
+                {data.author.verified && (
+                  <FaRegCheckCircle className="text-blue-500" />
+                )}
               </div>
               <div className="grid grid-cols-2 gap-4">
-      <div className="flex items-center gap-2">
-        <FaUsers className="text-blue-500" />
-        <span>
-          <strong>Followers: </strong>{formatNumber(data.author.followers)}
-        </span>
-      </div>
-      <div className="flex items-center gap-2">
-        <FaUsers className="text-green-500" />
-        <span>
-        <strong>Friends:</strong> {formatNumber(data.author.friends)}
-        </span>
-      </div>
-      <div className="flex items-center gap-2">
-        <FaListUl className="text-purple-500" />
-        <span>
-        <strong>Listed Count:</strong> {formatNumber(data.author.listed_ount)}
-        </span>
-      </div>
-      <div className="flex items-center gap-2">
-        <FaImages className="text-yellow-500" />
-        <span>
-        <strong>Media Count:</strong> {formatNumber(data.author.media_count)}
-        </span>
-      </div>
-      <div className="flex items-center gap-2">
-        <FaInfoCircle className="text-gray-500" />
-        <span>
-        <strong>Statuses:</strong> {formatNumber(data.author.statuses)}
-        </span>
-      </div>
-      <div className="flex items-center gap-2">
-        <FaTwitter className="text-blue-500" />
-        <span>
-        <strong>Favorites:</strong> {formatNumber(data.author.favorite)}
-        </span>
-      </div>
-    </div>
+                <div className="flex items-center gap-2">
+                  <FaUsers className="text-blue-500" />
+                  <span>
+                    <strong>Followers: </strong>
+                    {formatNumber(data.author.followers)}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaUsers className="text-green-500" />
+                  <span>
+                    <strong>Friends:</strong>{" "}
+                    {formatNumber(data.author.friends)}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaListUl className="text-purple-500" />
+                  <span>
+                    <strong>Listed Count:</strong>{" "}
+                    {formatNumber(data.author.listed_ount)}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaImages className="text-yellow-500" />
+                  <span>
+                    <strong>Media Count:</strong>{" "}
+                    {formatNumber(data.author.media_count)}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaInfoCircle className="text-gray-500" />
+                  <span>
+                    <strong>Statuses:</strong>{" "}
+                    {formatNumber(data.author.statuses)}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaTwitter className="text-blue-500" />
+                  <span>
+                    <strong>Favorites:</strong>{" "}
+                    {formatNumber(data.author.favorite)}
+                  </span>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>

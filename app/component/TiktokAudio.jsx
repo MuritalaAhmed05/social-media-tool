@@ -41,7 +41,6 @@ const TikTokAudioFetcher = () => {
   return (
     <div className="audio-fetcher">
       <h1>TikTok Audio Fetcher</h1>
-
       <input
         type="text"
         placeholder="Enter TikTok video URL"
@@ -49,13 +48,10 @@ const TikTokAudioFetcher = () => {
         onChange={(e) => setVideoUrl(e.target.value)} // Handle input change
         className="input-url"
       />
-
       <button onClick={fetchAudio} disabled={loading} className="fetch-button">
         {loading ? "Loading..." : "Fetch Audio"}
       </button>
-
       {error && <p className="error">{error}</p>} {/* Display error if any */}
-      
       {audioUrl && (
         <div className="audio-container">
           <h2>Audio Preview:</h2>

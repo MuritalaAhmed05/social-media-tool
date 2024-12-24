@@ -1,7 +1,12 @@
 "use client";
 import React from "react";
 import { ThemeProvider } from "../component/ThemeProvider";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 
 export default function HowToUse() {
   return (
@@ -15,7 +20,8 @@ export default function HowToUse() {
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-center mb-6">How to Use</h1>
           <p className="text-lg text-center mb-8">
-            Follow these simple steps to download your favorite content seamlessly!
+            Follow these simple steps to download your favorite content
+            seamlessly!
           </p>
 
           <Accordion type="single" collapsible className="space-y-4">
@@ -25,7 +31,10 @@ export default function HowToUse() {
                 Step 1: Copy the Link
               </AccordionTrigger>
               <AccordionContent>
-                Open your desired social media platform and find the video or post you want to download. Click on the <span className="font-semibold">Share</span> option and select <span className="font-semibold">Copy URL</span>.
+                Open your desired social media platform and find the video or
+                post you want to download. Click on the{" "}
+                <span className="font-semibold">Share</span> option and select{" "}
+                <span className="font-semibold">Copy URL</span>.
               </AccordionContent>
             </AccordionItem>
 
@@ -35,7 +44,8 @@ export default function HowToUse() {
                 Step 2: Open Our App
               </AccordionTrigger>
               <AccordionContent>
-                Launch our app and navigate to the section dedicated to the social media platform you want to download content from.
+                Launch our app and navigate to the section dedicated to the
+                social media platform you want to download content from.
               </AccordionContent>
             </AccordionItem>
 
@@ -45,7 +55,8 @@ export default function HowToUse() {
                 Step 3: Paste the Link
               </AccordionTrigger>
               <AccordionContent>
-                Paste the copied link into the input field provided in our app for that specific platform.
+                Paste the copied link into the input field provided in our app
+                for that specific platform.
               </AccordionContent>
             </AccordionItem>
 
@@ -55,7 +66,9 @@ export default function HowToUse() {
                 Step 4: Choose Download Quality
               </AccordionTrigger>
               <AccordionContent>
-                Select your preferred download quality (e.g., SD, HD, or 4K) from the available options. This ensures you get the best resolution for your needs.
+                Select your preferred download quality (e.g., SD, HD, or 4K)
+                from the available options. This ensures you get the best
+                resolution for your needs.
               </AccordionContent>
             </AccordionItem>
 
@@ -65,7 +78,9 @@ export default function HowToUse() {
                 Step 5: Click Download
               </AccordionTrigger>
               <AccordionContent>
-                Press the <span className="font-semibold">Download</span> button. The content will be saved directly to your phone in seconds, without watermarks or hassle.
+                Press the <span className="font-semibold">Download</span>{" "}
+                button. The content will be saved directly to your phone in
+                seconds, without watermarks or hassle.
               </AccordionContent>
             </AccordionItem>
           </Accordion>

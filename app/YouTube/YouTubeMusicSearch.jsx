@@ -52,7 +52,6 @@ export default function YouTubeMusicSearch() {
   return (
     <div className="w-full flex flex-col items-center">
       {/* Alert for errors */}
-     
 
       {/* Search Bar */}
       <div className="w-full flex flex-col items-center space-y-4 mb-8">
@@ -103,7 +102,9 @@ export default function YouTubeMusicSearch() {
               <h3 className="text-xl font-semibold">{track.title}</h3>
               <p className="text-sm">{track.artist}</p>
               <p className="text-sm text-gray-400">Album: {track.album}</p>
-              <p className="text-sm text-gray-400">Duration: {track.duration.label}</p>
+              <p className="text-sm text-gray-400">
+                Duration: {track.duration.label}
+              </p>
             </div>
             <div className="p-4">
               <iframe

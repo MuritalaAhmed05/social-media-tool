@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function InstagramStalk() {
-  return (
-    <div>InstagramStalk</div>
-  )
+  return <div>InstagramStalk</div>;
 }
