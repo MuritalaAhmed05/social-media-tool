@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,14 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import TikTokDownloader from "../TikTok/TiktokDownload";
 import TikTokProfile from "../TikTok/TikTokStalk";
 import TikTokSearch from "../TikTok/TikTokSearch";
 import InstagramDownload from "../Instagram/InstagramDownload";
-import InstagramStalk from "../Instagram/InstagramStalk";
 import XDownload from "../X/XDownload";
 import YouTubeDownload from "../YouTube/YouTubeDownload";
 import YouTubeToMp3 from "../YouTube/YouTubeToMp3";
@@ -29,6 +25,7 @@ import SpotifyPlayListSearch from "../Spotify/SpotifyPlayListSearch";
 import SpotifyAlbumSearch from "../Spotify/SpotifyAlbumSearch";
 import YouTubeMusicSearch from "../YouTube/YouTubeMusicSearch";
 import YouTubeMusicAlbum from "../YouTube/YouTubeMusicAlbum";
+import TiktokDownloaderHow from "../TikTok/TiktokDownloaderHow";
 
 export function TabsDemo() {
   return (
@@ -67,7 +64,7 @@ export function TabsDemo() {
                       <TikTokDownloader className="w-full" />
                     </CardContent>
                     <CardFooter>
-                      {/* <Button>Save changes</Button> */}
+                     <TiktokDownloaderHow/>
                     </CardFooter>
                   </Card>
                 </TabsContent>
@@ -77,7 +74,7 @@ export function TabsDemo() {
                     <CardHeader>
                       <CardTitle>TikTok Stalk</CardTitle>
                       <CardDescription>
-                        Check any TikToker's Profile by there UserName
+                        Check any TikToker's Profile by their UserName
                       </CardDescription>
                     </CardHeader>
 
@@ -95,7 +92,7 @@ export function TabsDemo() {
                   <Card>
                     <CardHeader>
                       <CardTitle>TikTok Search</CardTitle>
-                      <CardDescription>Enter your search...</CardDescription>
+                      <CardDescription>Search for any Tiktok video here</CardDescription>
                     </CardHeader>
 
                     <CardContent className="space-y-2">

@@ -10,13 +10,9 @@ export default function SpotifyDownload() {
   const [trackData, setTrackData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  // Handle URL input change
   const handleUrlChange = (e) => {
     setUrl(e.target.value);
   };
-
-  // Fetch track data from the API
   const fetchTrackData = async () => {
     setLoading(true);
     setError("");
@@ -38,17 +34,14 @@ export default function SpotifyDownload() {
       setLoading(false);
     }
   };
-
-  // Handle download
   const handleDownload = () => {
     if (trackData) {
       const link = document.createElement("a");
       link.href = trackData.url;
-      link.download = `${trackData.title}.mp3`; // Set filename
+      link.download = `${trackData.title}.mp3`;
       link.click();
     }
   };
-
   return (
     <div className="w-full flex flex-col items-center">
       <Input
@@ -74,14 +67,12 @@ export default function SpotifyDownload() {
           </>
         )}
       </Button>
-
       {error && (
         <Alert variant="destructive" className="w-full mt-4">
           <AlertTitle>Error:</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
-
       {trackData && (
         <div className="mt-6 w-full flex flex-col items-center">
           <img
@@ -91,7 +82,6 @@ export default function SpotifyDownload() {
           />
           <h3 className="text-xl font-semibold">{trackData.title}</h3>
           <p className="mt-2">By: {trackData.author}</p>
-
           <button
             onClick={handleDownload}
             className="mt-4 bg-black text-white p-2 rounded-md flex items-center justify-center space-x-2"
