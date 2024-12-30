@@ -6,35 +6,35 @@ export default function TiktokDownloaderHow() {
   const steps = [
     {
       title: "Open the TikTok app and locate the video you want to download.",
-      image: "/Tiktok/img1.jpg",
+      image: "/TikTok/img1.jpg",
       alt: "Open TikTok App",
     },
     {
       title:
         'If the video does not have a save option, click on the "Share" or "Link" icon as shown below.',
-      image: "/Tiktok/img2.jpg",
+      image: "/TikTok/img2.jpg",
       alt: "Click on Share/Link Icon",
     },
     {
       title:
         'Copy the video link and paste it into the input field provided in the TikTok Downloader. Then, click the "Download" button.',
-      image: "/Tiktok/img3.jpg",
+      image: "/TikTok/img3.jpg",
       alt: "Paste Link and Click Download",
     },
     {
       title:
         "The video details will be processed in just a few seconds, as demonstrated below.",
-      image: "/Tiktok/img4.jpg",
+      image: "/TikTok/img4.jpg",
       alt: "Generated Video Info",
     },
     {
       title: "Select the media type and download size that suits your needs.",
-      image: "/Tiktok/img5.jpg",
+      image: "/TikTok/img5.jpg",
       alt: "Choose Media Type",
     },
     {
       title: 'Click the "Download" button to save the media to your device.',
-      image: "/Tiktok/img6.jpg",
+      image: "/TikTok/img6.jpg",
       alt: "Save Media",
     },
   ];
